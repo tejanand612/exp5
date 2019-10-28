@@ -1,0 +1,219 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DOM Elements and Events</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel='stylesheet' type='text/css' href='exp5.css'>
+    </head>
+    <body>
+        <div class="start"  style='margin:5%;'>
+            <h1>Find the Shortest and Longest Word in a String</h1>
+            <form>
+                <fieldset style="padding:1.5%;">
+                    <legend>Longest and Shortest String</legend>
+                    <input type="text" id="stringlen" placeholder="Enter Any Text"><br><br>
+                    <input type="button" value="Get Shortest and Longest String" onclick="calString();">
+                </fieldset>
+            </form>
+            <p style='margin: 2%;' id='short'></p>
+            <p style='margin: 2%;' id='long'></p>
+        </div>
+
+
+<div  class ='start' style='margin:5%;'>
+            <h1>Calculate Your Body Mass Index (BMI)!</h1>
+            <fieldset>
+                <legend>BMI Calculator</legend>
+                Weight in (Kg) : <input type='text' id='weight' pattern='[0-9]*'><br>
+                Height in (m)  : <input type='text' id='height'><br>
+                <input type ='button' onclick='bmiCal();' value='Calculate BMI'>
+            </fieldset>
+            <p id='score'></p>
+            <p id='type'></p>
+        </div>
+
+
+
+
+<div class ='start' style='margin:5%;'>
+            <h1>Build a Fruit Farm</h1>
+            <fieldset>
+                <legend>Build Fruit Farm</legend>
+                Enter the No of Rows : <input type='text' id='rows'><br>
+                Enter the No of Columns : <input type='text' id='cols'><br>
+                <input type='button' value='Plant Garden' onclick='plant();'>
+            </fieldset>  
+            <div id='garden'></div>
+        </div>
+
+
+
+<div class='start' >
+            <h1>Currency Converter</h1>
+            <form>
+                <fieldset>
+                    <legend>Convert Currency</legend>
+                    Convert <input type='text' id='data' pattern='[0-9]*' placeholder='Enter Currency Value'><br>
+                    From <select id='from'>
+                        <option>Indian Rupee</option>
+                        <option>US Dollar</option>
+                    </select><br>
+                    To <select id='to'>
+                        <option>Indian Rupee</option>
+                        <option>US Dollar</option>
+                    </select><br>
+                    <input type="button" onclick="convert();" value="Convert">
+                   
+                </fieldset>
+               
+            </form>
+            <p id="resc"></p>
+        </div>
+
+
+
+<div class='start'>
+            <h1>Heads or Tails?</h1>
+            <img src='' id='imga'><br>
+            <input id='flip' type="button" value="Flip!" ><br>
+            Heads : <p id="head">0</p><br>
+            Tails : <p id="tail">0</p>
+        </div>
+
+
+
+
+
+
+<div class='start'>
+                <h1>Cake Order Form</h1>
+                <form>
+                    <fieldset>
+                        <legend>Enter Order Details</legend>
+                        No of 1/2Kg Cakes : <input type='text' id='small' pattern='[0-9]*'><br>
+                        No of 1Kg Cakes : <input type='text' id='med' pattern='[0-9]*'><br>
+                        No of 2Kg Cakes : <input type='text' id='large' pattern='[0-9]*'><br>
+                        <br>
+                        Tip : <input type='radio' name='tip' value="10">10%&nbsp;
+                        <input type='radio' name='tip' value='15' checked>15%&nbsp;
+                        <input type='radio' name='tip' value='20'>20%<br>
+                        <input type='button' id='sub' value='Calculate Order'>
+                    </fieldset>
+                </form>
+                Total Cost of Order : <span id='tot'></span>
+            </div>
+        <script>
+          function calString(){
+              var str=document.getElementById('stringlen').value;
+              var a=str.split(' ');
+              var long="";
+              var short=str;
+              for(var i = 0;i<a.length;i++){
+                  if(a[i].length>long.length){
+                      long=a[i];
+                  }
+                  if(a[i].length<short.length){
+                      short=a[i];
+                  }
+              }
+              document.getElementById('long').innerHTML='Longest String is: "'+long+'"';
+              document.getElementById('short').innerHTML='Shortest String is: "'+short+'"';
+          }  
+
+
+function bmiCal(){
+            h = parseFloat(document.getElementById('height').value);
+            w = parseFloat(document.getElementById('weight').value);
+            var bmi=w/(h*h);
+            var type;
+            if(bmi<18){
+                type='Underweight';
+            }
+            else if(bmi<=25){
+                type='Normal';
+            }
+            else if(bmi<=30){
+                type='Overweight';
+            }
+            else if(bmi>30){
+                type='Obese';
+            }
+            document.getElementById('score').innerHTML="Your BMI Score is : "+bmi;
+            document.getElementById('type').innerHTML="Your Body Type is : "+type;
+        }
+
+
+
+function plant(){
+             rows=parseInt(document.getElementById('rows').value);
+             cols=parseInt(document.getElementById('cols').value);
+             for(var i=0;i<cols;i++){
+                 for (var j=0;j<rows;j++){
+                     var num=Math.floor((Math.random()*2)+1);
+                     if(num===1){
+                       document.getElementById('garden').innerHTML+='<img src="apple.jpg" width=100 height=100>';
+                   }
+                     else if(num===2){
+                         document.getElementById('garden').innerHTML+='<img src="orange.jpg" width=100 height=100>';
+                     }
+                 }
+                 document.getElementById('garden').innerHTML+='<br>';
+             }
+            }
+
+
+
+function convert(){
+                var from = document.getElementById('from').value;
+                var to = document.getElementById('to').value;
+                var data= parseInt(document.getElementById('data').value);
+                if(from===to){
+                    document.getElementById('resc').innerHTML = data+" "+from;
+                }
+                else if(from==='Indian Rupee'){
+                    document.getElementById('resc').innerHTML = data+" "+from+" is "+data*0.015+" "+to;
+                }
+                else{
+                    document.getElementById('resc').innerHTML = data+" "+from+" is "+data*67.12+" "+to;
+                }
+            }
+
+
+
+
+
+document.getElementById('flip').addEventListener('click',function(){
+                var num = Math.floor((Math.random()*2)+1);
+               
+                if(num===1){
+                    document.getElementById('imga').src='heads.jpg';
+                   
+                    document.getElementById('head').innerHTML=parseInt(document.getElementById('head').innerHTML)+1;
+                }
+                else{
+                    document.getElementById('imga').src='tails.jpg';
+                    document.getElementById('tail').innerHTML=parseInt(document.getElementById('tail').innerHTML)+1;
+                }
+               
+            });
+
+
+
+
+
+document.getElementById('sub').addEventListener('click',function(){
+               var sm=parseFloat(document.getElementById('small').value);
+               var md=parseFloat(document.getElementById('med').value);
+               var lg=parseFloat(document.getElementById('large').value);
+               var tip=parseFloat(document.querySelector('input[name="tip"]:checked').value);
+               var tot = (sm*100)+(md*200)+(lg*400);
+               tot = (tot*(tip/100))+tot;
+               document.getElementById('tot').innerHTML='Rs.'+tot;
+               
+            });
+        </script>
+        <center><p class='cpy'>&copy;A.Tejanand - URK17CS102</p></center>
+    </body>
+</html>
